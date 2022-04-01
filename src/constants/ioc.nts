@@ -1,0 +1,18 @@
+export const kIoc = {
+    APP: 'APP',
+    SERVER: 'SERVER',
+    CLIENT: 'CLIENT'
+}
+
+export const kIocVisibility = {
+	[kIoc.SERVER]: {
+		[kIoc.CLIENT]: false
+	},
+	[kIoc.CLIENT]: {
+		[kIoc.SERVER]: false
+	},
+}
+
+export const kIocEntities = {
+    appInternals: Symbol.for('AppInternals')
+}

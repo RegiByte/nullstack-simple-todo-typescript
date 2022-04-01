@@ -1,22 +1,36 @@
 import Nullstack from 'nullstack';
 import TodoCounter from './TodoCounter';
 import TodoList from './TodoList';
-import { ApplicationClientContext } from './types';
+import {ApplicationClientContext} from './types';
+import {kIoc, kIocEntities} from "./constants/ioc.nts";
 
 class Application extends Nullstack {
+	initiate({page, ioc}: ApplicationClientContext) {
+		page.locale = 'pt-BR';
+		const config = ioc?.getNamed(kIocEntities.appInternals, 'config')
+		console.log({
+			method: 'prepare',
+			config,
+			ioc
+		})
+	}
 
-  prepare({ page }: ApplicationClientContext) {
-    page.locale = 'pt-BR';
-  }
+	hydrate({ioc}) {
+		const config = ioc?.getNamed(kIocEntities.appInternals, 'config')
+		console.log({
+			method: 'hydrate',
+			config
+		})
+	}
 
-  render() {
-    return (
-      <main>
-        <TodoList />
-        <TodoCounter />
-      </main>
-    )
-  }
+	render() {
+		return (
+			<main>
+				<TodoList/>
+				<TodoCounter/>
+			</main>
+		)
+	}
 
 }
 

@@ -1,4 +1,5 @@
 import { NullstackClientContext } from "nullstack/types";
+import {NullstackIocContainer} from "./bootstrap/internals/NullstackIocContainer.nts";
 
 export interface Todo {
   description: string
@@ -7,4 +8,6 @@ export interface Todo {
 
 export interface ApplicationClientContext extends NullstackClientContext {
   todos?: Todo[]
+  ioc: NullstackIocContainer
+  iocContainers: NullstackContainers
 }

@@ -1,0 +1,13 @@
+import {kIoc} from "../constants/ioc.nts";
+import {ServerContainer} from "../bootstrap/ioc/ServerContainer.nts";
+import {AppContainer} from "../bootstrap/ioc/AppContainer.nts";
+import {ClientContainer} from "../bootstrap/ioc/ClientContainer.nts";
+import {NullstackIocContainers} from "../bootstrap/internals/NullstackIocContainer.nts";
+
+export const iocContainers: NullstackIocContainers = {
+	[kIoc.APP]: AppContainer,
+	[kIoc.SERVER]: ServerContainer,
+	[kIoc.CLIENT]: ClientContainer
+}
+
+

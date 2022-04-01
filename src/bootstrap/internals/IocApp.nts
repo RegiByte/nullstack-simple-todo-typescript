@@ -1,0 +1,6 @@
+import {NullstackIocContainer, NullstackIocContainers} from "./NullstackIocContainer.nts";
+
+export interface NullstackIocApp {
+	iocContainers: NullstackIocContainers
+	mainContainer: NullstackIocContainer
+}

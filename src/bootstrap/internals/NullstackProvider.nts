@@ -1,0 +1,11 @@
+import {Container} from "inversify";
+import {NullstackIocContainer, NullstackIocContainers} from "./NullstackIocContainer.nts";
+
+export type NullstackProviders = NullstackProvider[]
+export type AppProviders = Record<string, NullstackProviders>
+
+export interface NullstackProvider {
+	boot(mainContainer: NullstackIocContainer, allContainers: NullstackIocContainers): void
+
+	getName(): string
+}

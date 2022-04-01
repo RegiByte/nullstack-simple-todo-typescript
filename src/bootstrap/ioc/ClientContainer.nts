@@ -1,0 +1,16 @@
+import {Container} from "inversify";
+import {NullstackIocContainer} from "../internals/NullstackIocContainer.nts";
+
+export class ClientContainer extends Container implements NullstackIocContainer {
+    constructor(props: object = {}) {
+        super({
+            skipBaseClassChecks: false,
+            autoBindInjectable: false,
+            ...props,
+        });
+    }
+
+		getName(): string {
+			return "Client"
+		}
+}
