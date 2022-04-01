@@ -1,15 +1,15 @@
-import Nullstack, { NullstackServerContext } from 'nullstack';
-import { ApplicationClientContext } from './types';
+import Nullstack, {NullstackServerContext} from 'nullstack';
+import {ApplicationClientContext} from './types';
 
 class TodoForm extends Nullstack {
 
   description = '';
 
-  static async mockInsertTodo({ environment }: NullstackServerContext): Promise<boolean> {
+  static async mockInsertTodo({environment}: NullstackServerContext): Promise<boolean> {
     return environment.server
   }
 
-  async addTodo({ todos }: ApplicationClientContext) {
+  async addTodo({todos}: ApplicationClientContext) {
     todos.push({
       description: this.description,
       complete: false
@@ -21,8 +21,8 @@ class TodoForm extends Nullstack {
   render() {
     return (
       <form onsubmit={this.addTodo}>
-        <input bind={this.description} required autocomplete="off" />
-        <button> Add todo </button>
+        <input bind={this.description} required autocomplete="off"/>
+        <button> Add todo</button>
       </form>
     )
   }

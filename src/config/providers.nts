@@ -3,10 +3,10 @@ import {ConfigProvider} from "../app/providers/ConfigProvider.nts";
 import {AppProviders, NullstackProvider} from "../bootstrap/internals/NullstackProvider.nts";
 
 export const providers: AppProviders = {
-	[kIoc.APP]: [
-		ConfigProvider
-	],
-	[kIoc.SERVER]: [
-		ConfigProvider
-	]
+  [kIoc.APP]: [
+    ConfigProvider
+  ],
+  [kIoc.SERVER]: [
+    ConfigProvider
+  ]
 }

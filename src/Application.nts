@@ -5,35 +5,35 @@ import {ApplicationClientContext} from './types';
 import {kIoc, kIocEntities} from "./constants/ioc.nts";
 
 class Application extends Nullstack {
-	initiate({page, ioc}: ApplicationClientContext) {
-		page.locale = 'pt-BR';
-	}
+  initiate({page, ioc}: ApplicationClientContext) {
+    page.locale = 'pt-BR';
+  }
 
-	static async testIocServer({ioc}) {
-		console.log({
-			method: 'testIocServer',
-			ioc: ioc.getNamed(kIocEntities.appInternals, 'config')
-		})
-	}
+  static async testIocServer({ioc}) {
+    console.log({
+      method: 'testIocServer',
+      ioc: ioc.getNamed(kIocEntities.appInternals, 'config')
+    })
+  }
 
-	hydrate({ioc}) {
-		const config = ioc?.getNamed(kIocEntities.appInternals, 'config')
-		console.log({
-			method: 'hydrate',
-			config
-		})
+  hydrate({ioc}) {
+    const config = ioc?.getNamed(kIocEntities.appInternals, 'config')
+    console.log({
+      method: 'hydrate',
+      config
+    })
 
-		this.testIocServer()
-	}
+    this.testIocServer()
+  }
 
-	render() {
-		return (
-			<main>
-				<TodoList/>
-				<TodoCounter/>
-			</main>
-		)
-	}
+  render() {
+    return (
+      <main>
+        <TodoList/>
+        <TodoCounter/>
+      </main>
+    )
+  }
 
 }
 
