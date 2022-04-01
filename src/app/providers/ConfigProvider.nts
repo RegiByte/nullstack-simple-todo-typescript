@@ -1,0 +1,27 @@
+import {Container} from "inversify";
+import {kIocEntities} from "../../constants/ioc.nts";
+import {NullstackProvider} from "../../bootstrap/internals/NullstackProvider.nts";
+import {NullstackIocContainer, NullstackIocContainers} from "../../bootstrap/internals/NullstackIocContainer.nts";
+
+export class ConfigProvider implements NullstackProvider {
+
+  getName(): string {
+    return "ConfigProvider";
+  }
+
+  boot(mainContainer: NullstackIocContainer, allContainers: NullstackIocContainers): void {
+    allContainers.server.bind(kIocEntities.appInternals).toConstantValue({
+      serverConfig1: 'blabla',
+      serverConfig2: 'blabla',
+      config1: 'specific server config1',
+      config2: 'specific server config2'
+    }).whenTargetNamed('config')
+
+    allContainers.client.bind(kIocEntities.appInternals).toConstantValue({
+      serverConfig1: 'client blabla',
+      serverConfig2: 'client blabla',
+      config1: 'specific client config1',
+      config2: 'specific client config2'
+    }).whenTargetNamed('config')
+  }
+}

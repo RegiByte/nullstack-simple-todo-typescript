@@ -1,0 +1,8 @@
+import {interfaces} from "inversify";
+import Container = interfaces.Container;
+
+export type NullstackIocContainers = Record<string, NullstackIocContainer>
+
+export interface NullstackIocContainer extends Container {
+	getName(): string
+}

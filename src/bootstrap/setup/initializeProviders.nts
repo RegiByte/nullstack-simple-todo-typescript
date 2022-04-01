@@ -1,0 +1,52 @@
+import {NullstackIocContainer, NullstackIocContainers} from "../internals/NullstackIocContainer.nts";
+import {kIocVisibility} from "../../constants/ioc.nts";
+import {providers} from "../../config/providers.nts";
+import {NullstackProvider} from "../internals/NullstackProvider.nts";
+
+interface InitializeProviderProps {
+  mainContainer: NullstackIocContainer
+  allContainers: NullstackIocContainers,
+  provider: NullstackProvider
+}
+
+const initializedProviders = []
+
+export function initializeProvider({mainContainer, allContainers, provider}: InitializeProviderProps) {
+  // Initialize only once
+  if (initializedProviders.some(p => p.getName() === (new (provider as any) as NullstackProvider).getName())) {
+    console.log('Skipping boot up of provider', provider)
+    return
+  }
+
+  const AppProvider = provider as any
+  const providerInstance = new AppProvider() as NullstackProvider
+
+  providerInstance.boot(mainContainer, allContainers)
+
+  initializedProviders.push(providerInstance)
+}
+
+export function initializeProviders(mainContainer: NullstackIocContainer, containers: NullstackIocContainers) {
+  const mainContainerName = mainContainer.getName()
+
+  Object.values(containers).forEach((container: NullstackIocContainer) => {
+    const currentContainerName = container.getName()
+    const containerVisibility = kIocVisibility?.[mainContainerName.toUpperCase()]?.[currentContainerName.toUpperCase()]
+
+    if (typeof containerVisibility !== 'undefined' && !containerVisibility) {
+      return // Container should not be initialized based on visibility list
+    }
+
+    const currentProviders = providers?.[currentContainerName.toUpperCase()] || []
+
+    if (!currentProviders.length) return
+
+    currentProviders.forEach((provider) => {
+      initializeProvider({
+        provider,
+        mainContainer,
+        allContainers: containers
+      })
+    })
+  })
+}
