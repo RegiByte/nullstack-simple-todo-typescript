@@ -1,6 +1,6 @@
+import 'reflect-metadata'
 import Nullstack from 'nullstack';
 import Application from './src/Application';
-import 'reflect-metadata'
 import {Container} from 'inversify'
 import {setupApp} from "./src/bootstrap/setup/setup.nts";
 import {kIoc} from "./src/constants/ioc";

@@ -1,3 +1,4 @@
+import 'reflect-metadata'
 import Nullstack from 'nullstack';
 import Application from './src/Application';
 import {setupApp} from "./src/bootstrap/setup/setup";
