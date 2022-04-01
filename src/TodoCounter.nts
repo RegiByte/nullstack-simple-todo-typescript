@@ -1,6 +1,6 @@
-import {ApplicationClientContext} from "./types";
+import { ApplicationClientContext } from "./types";
 
-export default function TodoCounter({todos}: ApplicationClientContext) {
+export default function TodoCounter({ todos }: ApplicationClientContext) {
   const completeCount: number = (todos || []).filter((todo) => todo.complete).length
   if (!completeCount) return false;
   return (
