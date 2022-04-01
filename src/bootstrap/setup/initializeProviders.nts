@@ -12,12 +12,18 @@ interface InitializeProviderProps {
 const initializedProviders = []
 
 export function initializeProvider({mainContainer, allContainers, provider}: InitializeProviderProps) {
-	console.log('Initializing provider')
+	// Initialize only once
+	if (initializedProviders.some(p => p.getName() === (new (provider as any) as NullstackProvider).getName())) {
+		console.log('Skipping boot up of provider', provider)
+		return
+	}
 
 	const AppProvider = provider as any
 	const providerInstance = new AppProvider() as NullstackProvider
 
 	providerInstance.boot(mainContainer, allContainers)
+
+	initializedProviders.push(providerInstance)
 }
 
 export function initializeProviders(mainContainer: NullstackIocContainer, containers: NullstackIocContainers) {

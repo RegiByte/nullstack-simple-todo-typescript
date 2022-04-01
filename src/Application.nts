@@ -7,11 +7,12 @@ import {kIoc, kIocEntities} from "./constants/ioc.nts";
 class Application extends Nullstack {
 	initiate({page, ioc}: ApplicationClientContext) {
 		page.locale = 'pt-BR';
-		const config = ioc?.getNamed(kIocEntities.appInternals, 'config')
+	}
+
+	static async testIocServer({ioc}) {
 		console.log({
-			method: 'prepare',
-			config,
-			ioc
+			method: 'testIocServer',
+			ioc: ioc.getNamed(kIocEntities.appInternals, 'config')
 		})
 	}
 
@@ -21,6 +22,8 @@ class Application extends Nullstack {
 			method: 'hydrate',
 			config
 		})
+
+		this.testIocServer()
 	}
 
 	render() {
